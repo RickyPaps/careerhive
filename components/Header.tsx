@@ -11,7 +11,7 @@ import React from "react";
 
 const Header = () => {
   return (
-    <div className="flex items-center p-2 max-w-6xl mx-auto bg-black text-white">
+    <div className="flex items-center p-2 max-w-6xl mx-auto text-white">
       <Image
         className="rounded-lg"
         src="/Logo-1.png"

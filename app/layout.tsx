@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CareerHive App",
@@ -17,14 +14,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className='min-h-screen flex flex-col'>
         {/* Toaster */}
 
-        <header>
+        <header className="border-b sticky top-0 z-50 bg-black">
           <Header />
         </header>
 
-        <div>
+        <div className="bg-[#F5F5F5] flex-1 w-full">
           <main> {children}</main>
         </div>
       </body>

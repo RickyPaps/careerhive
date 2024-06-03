@@ -16,14 +16,14 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="min-h-screen flex flex-col">
+        <body className="flex min-h-screen flex-col">
           {/* Toaster */}
 
-          <header className="border-b sticky top-0 z-50 bg-black">
+          <header className="sticky top-0 z-50 border-b bg-black">
             <Header />
           </header>
 
-          <div className="bg-[#F5F5F5] flex-1 w-full">
+          <div className="w-full flex-1 bg-[#F5F5F5]">
             <main> {children}</main>
           </div>
         </body>

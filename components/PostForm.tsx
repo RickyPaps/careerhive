@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import React, { useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { ImageIcon, XIcon } from "lucide-react";
+import { createPostAction } from "@/actions/createPostAction";
 
 const PostForm = () => {
   const { user } = useUser();
@@ -32,7 +33,7 @@ const PostForm = () => {
     setPreview(null);
 
     try {
-    //   await createPostAction(formDataCopy);
+      await createPostAction(formDataCopy);
     } catch (error) {
       console.error("Error creating post", error);
     }

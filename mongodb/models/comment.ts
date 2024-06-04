@@ -1,5 +1,5 @@
 import { IUser } from "@/types/user";
-import mongoose, { Schema, Document, models } from "mongoose";
+import mongoose, { Schema, Document, models, Model } from "mongoose";
 
 export interface ICommentBase {
   user: IUser;
@@ -10,6 +10,8 @@ export interface IComment extends ICommentBase, Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+interface ICommentModel extends Model<IComment> {}
 
 const commentSchema = new Schema<IComment>(
   {
@@ -36,5 +38,5 @@ const commentSchema = new Schema<IComment>(
  * The new model is defined using the `commentSchema` schema and the name "Comment".
  * The return value of this statement is assigned to the `Comment` constant.
  */
-export const Comment = models.Comment || mongoose.model<IComment>("Comment", commentSchema);
+export const Comment = models.Comment as ICommentModel || mongoose.model<IComment>("Comment", commentSchema);
 

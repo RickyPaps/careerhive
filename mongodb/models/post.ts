@@ -158,6 +158,22 @@ PostSchema.methods.getAllComments = async function () {
 
 PostSchema.statics.getAllPosts = async function () {
   try {
+    // This code is using the `find` method provided by Mongoose's `Model` class.
+    // The `find` method is used to find documents in the database that match a specified filter.
+    // In this case, the filter is an empty object `{}`, which means that all documents in the collection will be returned.
+    // The `sort` method is used to sort the documents returned from the `find` method in descending order of the `createdAt` field.
+    // The `populate` method is used to replace references in the documents returned from the `find` method with the actual documents.
+    // In this case, the `comments` array in each post is being replaced with the actual comments.
+    // The `options` argument is an object that allows you to specify options for the population.
+    // In this case, the `sort` option is used to sort the comments by the `createdAt` field in descending order.
+    // The `lean` method is used to convert Mongoose objects to plain JS objects.
+    // This is needed because Mongoose objects contain methods and other properties that are not needed in the JSON response.
+    // The `map` method is used to transform the posts returned from the `find` method into the JSON response.
+    // The `map` method takes a callback function that will be called for each post in the array.
+    // The callback function takes the post as an argument and returns a new object that will be used in the JSON response.
+    // The new object is created using the spread operator (`...`) to copy all the properties of the post into the new object.
+    // The `_id` property is then replaced with a string version of the `_id` property.
+    // The `comments` property is then replaced with a new array of comments that have been transformed in a similar way.
     const posts = await this.find({})
       .sort({ createdAt: -1 })
       .populate({

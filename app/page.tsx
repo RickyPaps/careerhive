@@ -1,7 +1,17 @@
 import PostForm from "@/components/PostForm";
 import UserInformation from "@/components/UserInformation";
+import connectDB from "@/mongodb/db";
+import { Post } from "@/mongodb/models/post";
 
-export default function Home() {
+export const revalidate = 0; // Makes sure it is server side rendered
+
+export default async function Home() {
+  await connectDB();
+
+  const posts = await Post.getAllPosts();
+
+  console.log(posts);
+
   return (
     <div className="mt-5 grid grid-cols-8 sm:px-5">
       <section className="hidden md:col-span-2 md:inline">

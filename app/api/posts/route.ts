@@ -26,7 +26,7 @@ export interface AddPostRequestBody {
 }
 
 export async function POST(request: Request) {
- auth().protect(); //Protect the route with authentication
+//  auth().protect(); //Protect the route with authentication
 
   try {
     await connectDB();

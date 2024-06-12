@@ -69,8 +69,6 @@ export const createPostAction = async (formData: FormData) => {
         imageUrl: image_url,
       };
 
-      console.log("body", body);
-
       // upload image
       await Post.create(body);
     } else {

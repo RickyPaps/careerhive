@@ -8,6 +8,7 @@ import ReactTimeago from "react-timeago";
 import { Button } from "./ui/button";
 import { Trash2 } from "lucide-react";
 import { deletePostAction } from "@/actions/deletePostAction";
+import Image from "next/image";
 
 const Post = ({ post }: { post: IPostDocument }) => {
   const { user } = useUser();
@@ -49,6 +50,20 @@ const Post = ({ post }: { post: IPostDocument }) => {
             </Button>
           )}
         </div>
+      </div>
+      <div>
+        <p>{post.text}</p>
+
+        {/* if image */}
+        {post.imageUrl && (
+          <Image
+            src={post.imageUrl}
+            alt="image"
+            width={500}
+            height={500}
+            className="w-full mx-auto"
+          />
+        )}
       </div>
     </div>
   );

@@ -3,6 +3,9 @@ import { Post } from "@/mongodb/models/post";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
+export interface unlikePostRequestBody {
+  userId: string;
+}
 export async function POST(
   request: Request,
   { params }: { params: { post_id: string } },

@@ -72,32 +72,27 @@ const PostSchema = new Schema<IPostDocument>(
 );
 
 PostSchema.methods.likePost = async function (userId: string) {
+  // Add the userId to the "likes" array if it is not already in the array.
+  // If the update is successful, the method will return without throwing an error.
+  // If the update is unsuccessful, the error will be caught and re-thrown as a new error with the message "Failed to like post".
   try {
-    // This code is using the `updateOne` method provided by Mongoose's `Document` class.
-    // The `updateOne` method is used to update a single document in the database.
-    // In this case, the first argument `{}` is an empty filter, which means it will update the document that matches the current document (the one that the method is called on).
-    // The second argument `{ $addToSet: { likes: userId } }` is the update operation.
-    // The `$addToSet` operator is used to add a value to an array only if the value does not already exist in the array.
-    // In this case, the value being added to the `likes` array is the `userId` provided as an argument to the `likePost` method.
-    // If the `updateOne` method is successful, the `likes` array will contain the `userId` and the method will return without throwing an error.
-    // If the `updateOne` method is unsuccessful, the error will be caught and re-thrown as a new error with the message "Failed to like post".
-    await this.updateOne({}, { $addToSet: { likes: userId } });
+    await this.updateOne({ $addToSet: { likes: userId } });
   } catch (error) {
-    throw new Error("Failed to like post");
+    throw new Error(`Failed to like post: ${error}`);
   }
 };
 
 PostSchema.methods.unlikePost = async function (userId: string) {
+  // This code is using the `updateOne` method provided by Mongoose's `Document` class.
+  // The `updateOne` method is used to update a single document in the database.
+  // In this case, the first argument `{}` is an empty filter, which means it will update the document that matches the current document (the one that the method is called on).
+  // The second argument `{ $pull: { likes: userId } }` is the update operation.
+  // The `$pull` operator is used to remove a specific value from an array.
+  // In this case, the value being removed from the `likes` array is the `userId` provided as an argument to the `unlikePost` method.
+  // If the `updateOne` method is successful, the `likes` array will no longer contain the `userId` and the method will return without throwing an error.
+  // If the `updateOne` method is unsuccessful, the error will be caught and re-thrown as a new error with the message "Failed to unlike post".
   try {
-    // This code is using the `updateOne` method provided by Mongoose's `Document` class.
-    // The `updateOne` method is used to update a single document in the database.
-    // In this case, the first argument `{}` is an empty filter, which means it will update the document that matches the current document (the one that the method is called on).
-    // The second argument `{ $pull: { likes: userId } }` is the update operation.
-    // The `$pull` operator is used to remove a specific value from an array.
-    // In this case, the value being removed from the `likes` array is the `userId` provided as an argument to the `unlikePost` method.
-    // If the `updateOne` method is successful, the `likes` array will no longer contain the `userId` and the method will return without throwing an error.
-    // If the `updateOne` method is unsuccessful, the error will be caught and re-thrown as a new error with the message "Failed to unlike post".
-    await this.updateOne({}, { $pull: { likes: userId } });
+    await this.updateOne({ $pull: { likes: userId } });
   } catch (error) {
     throw new Error("Failed to unlike post");
   }

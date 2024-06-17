@@ -43,8 +43,6 @@ const PostForm = () => {
     <div className="mb-2">
       <form
         action={(formData) => {
-          console.log(formData);
-
           // Handle form submission server action
 
           handlePostAction(formData);
